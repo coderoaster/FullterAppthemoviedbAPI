@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'common/config.dart';
 import 'page/PageHome.dart';
+import 'page/PageDetail.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,5 +23,10 @@ final pages = [
     name: '/home',
     transition: Transition.fade,
     page: () => PageHome(),
+  ),
+  GetPage(
+    name: '/detail',
+    transition: Transition.fade,
+    page: () => Pagedetail(),
   ),
 ];

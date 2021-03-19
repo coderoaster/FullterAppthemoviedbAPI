@@ -33,18 +33,23 @@ class PageHome extends StatelessWidget {
               '현재 상영중',
               style: TextStyle(fontSize: 20),
             ),
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Obx(() =>
-                      Image.network("$IMAGE_URL${c.playlist[0].posterPath}")),
-                  Obx(
-                    () => Text("${c.playlist[0].title}"),
-                  ),
-                  Obx(
-                    () => Text("평점 : ${c.playlist[0].voteAverage}"),
-                  ),
-                ],
+            GestureDetector(
+              onTap: () {
+                Get.toNamed("/detail", arguments: "${c.playlist[0].id}");
+              },
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Obx(() =>
+                        Image.network("$IMAGE_URL${c.playlist[0].posterPath}")),
+                    Obx(
+                      () => Text("${c.playlist[0].title}"),
+                    ),
+                    Obx(
+                      () => Text("평점 : ${c.playlist[0].voteAverage}"),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
