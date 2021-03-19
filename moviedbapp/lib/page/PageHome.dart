@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moviedbapp/common/config.dart';
-import 'package:moviedbapp/models/results.dart';
+import 'package:moviedbapp/models/movieList.dart';
 import 'package:moviedbapp/network/api.dart';
 
 class HomeController extends GetxController {
-  RxList<Results> playlist;
-  RxList<Results> upcominglist;
-  RxList<Results> popularlist;
-  RxList<Results> topratedlist;
+  RxList<MovieList> playlist;
+  RxList<MovieList> upcominglist;
+  RxList<MovieList> popularlist;
+  RxList<MovieList> topratedlist;
 
   RxInt playlistCount = 0.obs;
   RxInt upcomingCount = 0.obs;

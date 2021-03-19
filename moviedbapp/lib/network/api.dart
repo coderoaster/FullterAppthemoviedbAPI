@@ -4,11 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:moviedbapp/models/castmembers.dart';
 import 'package:moviedbapp/models/detail.dart';
-import 'package:moviedbapp/models/results.dart';
+import 'package:moviedbapp/models/movieList.dart';
+import 'package:moviedbapp/models/reviews.dart';
 import '../common/config.dart';
 
 class Api extends GetConnect {
-  Future<List<Results>> playing() async {
+  Future<List<MovieList>> playing() async {
     try {
       Response response =
           await get("$API_URL/movie/now_playing$API_Key$API_LANGUAGE");
@@ -16,10 +17,10 @@ class Api extends GetConnect {
       // print(body);
       List<dynamic> list = body['results'] != null ? body['results'] : [];
 
-      List<Results> output = [];
+      List<MovieList> output = [];
 
       for (final item in list) {
-        final resultsModel = Results.fromJson(item);
+        final resultsModel = MovieList.fromJson(item);
         output.add(resultsModel);
       }
 
@@ -30,7 +31,7 @@ class Api extends GetConnect {
     }
   }
 
-  Future<List<Results>> upcoming() async {
+  Future<List<MovieList>> upcoming() async {
     try {
       Response response =
           await get("$API_URL/movie/upcoming$API_Key$API_LANGUAGE");
@@ -38,10 +39,10 @@ class Api extends GetConnect {
       // print(body);
       List<dynamic> list = body['results'] != null ? body['results'] : [];
 
-      List<Results> output = [];
+      List<MovieList> output = [];
 
       for (final item in list) {
-        final resultsModel = Results.fromJson(item);
+        final resultsModel = MovieList.fromJson(item);
         output.add(resultsModel);
       }
 
@@ -52,7 +53,7 @@ class Api extends GetConnect {
     }
   }
 
-  Future<List<Results>> popular() async {
+  Future<List<MovieList>> popular() async {
     try {
       Response response =
           await get("$API_URL/movie/popular$API_Key$API_LANGUAGE");
@@ -60,10 +61,10 @@ class Api extends GetConnect {
       // print(body);
       List<dynamic> list = body['results'] != null ? body['results'] : [];
 
-      List<Results> output = [];
+      List<MovieList> output = [];
 
       for (final item in list) {
-        final resultsModel = Results.fromJson(item);
+        final resultsModel = MovieList.fromJson(item);
         output.add(resultsModel);
       }
 
@@ -74,7 +75,7 @@ class Api extends GetConnect {
     }
   }
 
-  Future<List<Results>> toprated() async {
+  Future<List<MovieList>> toprated() async {
     try {
       Response response =
           await get("$API_URL/movie/top_rated$API_Key$API_LANGUAGE");
@@ -82,10 +83,10 @@ class Api extends GetConnect {
       // print(body);
       List<dynamic> list = body['results'] != null ? body['results'] : [];
 
-      List<Results> output = [];
+      List<MovieList> output = [];
 
       for (final item in list) {
-        final resultsModel = Results.fromJson(item);
+        final resultsModel = MovieList.fromJson(item);
         output.add(resultsModel);
       }
 
@@ -127,6 +128,26 @@ class Api extends GetConnect {
       for (final item in list) {
         final resultsModel = Castmembers.fromJson(item);
 
+        output.add(resultsModel);
+      }
+
+      return output;
+    } catch (e) {
+      debugPrint(e);
+      return [];
+    }
+  }
+
+  Future<List<Reviews>> reviews(int movieId) async {
+    try {
+      Response response = await get("$API_URL/movie/$movieId/reviews$API_Key");
+      final body = response.body;
+      List<dynamic> list = body['results'] != null ? body['results'] : [];
+
+      List<Reviews> output = [];
+
+      for (final item in list) {
+        final resultsModel = Reviews.fromJson(item);
         output.add(resultsModel);
       }
 

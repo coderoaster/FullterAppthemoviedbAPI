@@ -1,4 +1,4 @@
-class Results {
+class MovieList {
   int id;
   String originalTitle;
   String overview;
@@ -7,7 +7,7 @@ class Results {
   String title;
   num voteAverage;
 
-  Results(
+  MovieList(
       {this.id,
       this.originalTitle,
       this.overview,
@@ -16,7 +16,7 @@ class Results {
       this.title,
       this.voteAverage});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  MovieList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     originalTitle = json['original_title'];
     overview = json['overview'];
