@@ -19,22 +19,40 @@ class PagedetailController extends GetxController {
 
 class Pagedetail extends StatelessWidget {
   final PagedetailController c = Get.put(PagedetailController());
+
   final id = Get.arguments;
   @override
   Widget build(context) {
     c.init(id);
     return Scaffold(
-        body: Container(
-      width: Get.width,
-      height: Get.height,
-      child: Center(
-        child: SingleChildScrollView(
+      body: Container(
+        child: Center(
+          child: SingleChildScrollView(
             child: Column(
-          children: <Widget>[
-            Obx(() => Text('${c.castlist[0].name}')),
-          ],
-        )),
+              children: <Widget>[
+                Obx(() => Image.network(
+                      "$IMAGE_URL${c.detail[0].posterPath}",
+                    )),
+                Obx(() => Text('${c.detail[0].title}')),
+                Text('개요'),
+                Obx(() => Text('${c.detail[0].overview}')),
+                Text('주요출연진'),
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      Obx(
+                        () => Image.network(
+                            '$IMAGE_URL${c.castlist[0].profilePath}'),
+                      ),
+                      Obx(() => Text('${c.castlist[0].name}'))
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
-    ));
+    );
   }
 }
