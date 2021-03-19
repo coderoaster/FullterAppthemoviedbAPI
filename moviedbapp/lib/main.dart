@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'common/config.dart';
 import 'page/PageHome.dart';
 
 void main() {
@@ -8,7 +9,7 @@ void main() {
   // await DesktopWindow.setFullScreen(true);
   runApp(
     GetMaterialApp(
-      title: 'FlutterAPP',
+      title: AppTitle,
       initialRoute: '/home',
       getPages: pages,
     ),
