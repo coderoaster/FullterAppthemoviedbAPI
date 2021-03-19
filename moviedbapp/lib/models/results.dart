@@ -2,6 +2,7 @@ class Results {
   int id;
   String originalTitle;
   String overview;
+  String posterPath;
   String releaseDate;
   String title;
   num voteAverage;
@@ -10,6 +11,7 @@ class Results {
       {this.id,
       this.originalTitle,
       this.overview,
+      this.posterPath,
       this.releaseDate,
       this.title,
       this.voteAverage});
@@ -18,6 +20,7 @@ class Results {
     id = json['id'];
     originalTitle = json['original_title'];
     overview = json['overview'];
+    posterPath = json['poster_path'];
     releaseDate = json['release_date'];
     title = json['title'];
     voteAverage = json['vote_average'];
@@ -28,6 +31,7 @@ class Results {
     data['id'] = this.id;
     data['original_title'] = this.originalTitle;
     data['overview'] = this.overview;
+    data['poster_path'] = this.posterPath;
     data['release_date'] = this.releaseDate;
     data['title'] = this.title;
     data['vote_average'] = this.voteAverage;
