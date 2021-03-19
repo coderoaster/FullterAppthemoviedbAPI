@@ -6,13 +6,25 @@ import 'package:moviedbapp/network/api.dart';
 
 class HomeController extends GetxController {
   RxList<Results> playlist;
+  RxList<Results> upcominglist;
+  RxList<Results> popularlist;
 
   RxInt playlistCount = 0.obs;
+  RxInt upcomingCount = 0.obs;
+  RxInt popularCount = 0.obs;
 
   init() async {
-    final apiItem = await Api().playing();
-    playlist = apiItem.obs;
-    playlistCount = apiItem.length.obs;
+    final playListdata = await Api().playing();
+    playlist = playListdata.obs;
+    playlistCount = playListdata.length.obs;
+
+    final upcominglistdata = await Api().upcoming();
+    upcominglist = upcominglistdata.obs;
+    upcomingCount = upcominglistdata.length.obs;
+
+    final popularlistdata = await Api().popular();
+    popularlist = popularlistdata.obs;
+    popularCount = popularlistdata.length.obs;
   }
 }
 
@@ -45,7 +57,7 @@ class PageHome extends StatelessWidget {
               child: Obx(() {
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: c.playlistCount.toInt(),
+                  itemCount: c.upcomingCount.toInt(),
                   itemBuilder: (context, index) {
                     return PlayList(
                       id: c.playlist[index].id,
@@ -58,7 +70,7 @@ class PageHome extends StatelessWidget {
               }),
             ),
             Text(
-              '현재 상영중',
+              '개봉예정',
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(
@@ -73,17 +85,17 @@ class PageHome extends StatelessWidget {
                   itemCount: c.playlistCount.toInt(),
                   itemBuilder: (context, index) {
                     return PlayList(
-                      id: c.playlist[index].id,
-                      post: c.playlist[index].posterPath,
-                      title: c.playlist[index].title,
-                      voteAverage: c.playlist[index].voteAverage,
+                      id: c.upcominglist[index].id,
+                      post: c.upcominglist[index].posterPath,
+                      title: c.upcominglist[index].title,
+                      voteAverage: c.upcominglist[index].voteAverage,
                     );
                   },
                 );
               }),
             ),
             Text(
-              '현재 상영중',
+              '인기',
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(
@@ -95,13 +107,13 @@ class PageHome extends StatelessWidget {
               child: Obx(() {
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: c.playlistCount.toInt(),
+                  itemCount: c.popularCount.toInt(),
                   itemBuilder: (context, index) {
                     return PlayList(
-                      id: c.playlist[index].id,
-                      post: c.playlist[index].posterPath,
-                      title: c.playlist[index].title,
-                      voteAverage: c.playlist[index].voteAverage,
+                      id: c.popularlist[index].id,
+                      post: c.popularlist[index].posterPath,
+                      title: c.popularlist[index].title,
+                      voteAverage: c.popularlist[index].voteAverage,
                     );
                   },
                 );
