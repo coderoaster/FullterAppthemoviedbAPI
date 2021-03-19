@@ -7,10 +7,13 @@ import 'package:moviedbapp/network/api.dart';
 
 class PagedetailController extends GetxController {
   RxList<Castmembers> castlist;
+  RxList<Detail> detail;
 
   init(String id) async {
-    final apiItem = await Api().cast(int.parse(id));
-    castlist = apiItem.obs;
+    final apicast = await Api().cast(int.parse(id));
+    castlist = apicast.obs;
+    final apidetail = await Api().detail(int.parse(id));
+    detail = apidetail.obs;
   }
 }
 

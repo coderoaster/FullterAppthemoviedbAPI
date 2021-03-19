@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:moviedbapp/models/castmembers.dart';
@@ -28,21 +30,24 @@ class Api extends GetConnect {
     }
   }
 
-  // Future<String> detail(int movieId) async {
-  //   try {
-  //     Response response =
-  //         await get("$API_URL/movie/$movieId$API_Key$API_LANGUAGE");
-  //     final body = response.body;
+  Future<List<Detail>> detail(int movieId) async {
+    try {
+      Response response =
+          await get("$API_URL/movie/$movieId$API_Key$API_LANGUAGE");
+      final body = response.body;
 
-  //     String list = body != null ? body : [];
-  //     print(list);
+      List<Detail> output = [];
 
-  //     return body;
-  //   } catch (e) {
-  //     debugPrint(e);
-  //     return '';
-  //   }
-  // }
+      final resultsModel = Detail.fromJson(body);
+
+      output.add(resultsModel);
+      print(resultsModel);
+      return output;
+    } catch (e) {
+      debugPrint(e);
+      return [];
+    }
+  }
 
   Future<List<Castmembers>> cast(int movieId) async {
     try {
