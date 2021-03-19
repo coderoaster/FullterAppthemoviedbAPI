@@ -28,21 +28,21 @@ class Api extends GetConnect {
     }
   }
 
-  Future<String> detail(int movieId) async {
-    try {
-      Response response =
-          await get("$API_URL/movie/$movieId$API_Key$API_LANGUAGE");
-      final body = response.body;
+  // Future<String> detail(int movieId) async {
+  //   try {
+  //     Response response =
+  //         await get("$API_URL/movie/$movieId$API_Key$API_LANGUAGE");
+  //     final body = response.body;
 
-      String list = body != null ? body : [];
-      print(list);
+  //     String list = body != null ? body : [];
+  //     print(list);
 
-      return body;
-    } catch (e) {
-      debugPrint(e);
-      return '';
-    }
-  }
+  //     return body;
+  //   } catch (e) {
+  //     debugPrint(e);
+  //     return '';
+  //   }
+  // }
 
   Future<List<Castmembers>> cast(int movieId) async {
     try {
@@ -50,13 +50,13 @@ class Api extends GetConnect {
           await get("$API_URL/movie/$movieId/credits$API_Key$API_LANGUAGE");
       final body = response.body;
 
-      List<dynamic> list = body['genres'] != null ? body['genres'] : [];
-      print("$API_URL/movie/$movieId$API_Key");
+      List<dynamic> list = body['cast'] != null ? body['cast'] : [];
 
       List<Castmembers> output = [];
 
-      for (final item in body) {
+      for (final item in list) {
         final resultsModel = Castmembers.fromJson(item);
+
         output.add(resultsModel);
       }
 

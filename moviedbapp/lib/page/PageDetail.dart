@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moviedbapp/common/config.dart';
+import 'package:moviedbapp/models/castmembers.dart';
 import 'package:moviedbapp/models/detail.dart';
-import 'package:moviedbapp/models/results.dart';
 import 'package:moviedbapp/network/api.dart';
 
 class PagedetailController extends GetxController {
-  RxString playlist;
+  RxList<Castmembers> castlist;
 
   init(String id) async {
-    final apiItem = await Api().detail(int.parse(id));
-    playlist = apiItem.obs;
+    final apiItem = await Api().cast(int.parse(id));
+    castlist = apiItem.obs;
   }
 }
 
@@ -28,10 +28,7 @@ class Pagedetail extends StatelessWidget {
         child: SingleChildScrollView(
             child: Column(
           children: <Widget>[
-            Text(
-              '현재 상영중',
-              style: TextStyle(fontSize: 20),
-            ),
+            Obx(() => Text('${c.castlist[0].name}')),
           ],
         )),
       ),
