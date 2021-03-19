@@ -74,6 +74,28 @@ class Api extends GetConnect {
     }
   }
 
+  Future<List<Results>> toprated() async {
+    try {
+      Response response =
+          await get("$API_URL/movie/top_rated$API_Key$API_LANGUAGE");
+      final body = response.body;
+      // print(body);
+      List<dynamic> list = body['results'] != null ? body['results'] : [];
+
+      List<Results> output = [];
+
+      for (final item in list) {
+        final resultsModel = Results.fromJson(item);
+        output.add(resultsModel);
+      }
+
+      return output;
+    } catch (e) {
+      debugPrint(e);
+      return [];
+    }
+  }
+
   Future<List<Detail>> detail(int movieId) async {
     try {
       Response response =

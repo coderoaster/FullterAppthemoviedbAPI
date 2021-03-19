@@ -8,10 +8,12 @@ class HomeController extends GetxController {
   RxList<Results> playlist;
   RxList<Results> upcominglist;
   RxList<Results> popularlist;
+  RxList<Results> topratedlist;
 
   RxInt playlistCount = 0.obs;
   RxInt upcomingCount = 0.obs;
   RxInt popularCount = 0.obs;
+  RxInt topratedCount = 0.obs;
 
   init() async {
     final playListdata = await Api().playing();
@@ -25,6 +27,10 @@ class HomeController extends GetxController {
     final popularlistdata = await Api().popular();
     popularlist = popularlistdata.obs;
     popularCount = popularlistdata.length.obs;
+
+    final topratedlisttdata = await Api().toprated();
+    topratedlist = topratedlisttdata.obs;
+    topratedCount = topratedlisttdata.length.obs;
   }
 }
 
@@ -114,6 +120,31 @@ class PageHome extends StatelessWidget {
                       post: c.popularlist[index].posterPath,
                       title: c.popularlist[index].title,
                       voteAverage: c.popularlist[index].voteAverage,
+                    );
+                  },
+                );
+              }),
+            ),
+            Text(
+              '높은평점',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Container(
+              width: 500,
+              height: 380,
+              child: Obx(() {
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: c.topratedCount.toInt(),
+                  itemBuilder: (context, index) {
+                    return PlayList(
+                      id: c.topratedlist[index].id,
+                      post: c.topratedlist[index].posterPath,
+                      title: c.topratedlist[index].title,
+                      voteAverage: c.topratedlist[index].voteAverage,
                     );
                   },
                 );
