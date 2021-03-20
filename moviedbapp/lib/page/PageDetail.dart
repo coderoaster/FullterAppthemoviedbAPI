@@ -40,38 +40,68 @@ class Pagedetail extends StatelessWidget {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Obx(
-                      () => Image.network(
-                        "$IMAGE_URL${c.detail[0].posterPath}",
+                Container(
+                  margin: const EdgeInsets.only(left: 20.0, top: 20.0),
+                  child: Row(
+                    children: <Widget>[
+                      Obx(
+                        () => Image.network(
+                          "$IMAGE_URL${c.detail[0].posterPath}",
+                        ),
                       ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          left: 20.0,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Obx(() => Text('${c.detail[0].title}')),
+                            Obx(() => Text('adult : ${c.detail[0].adult}')),
+                            Obx(() => Text(
+                                '${c.detail[0].genres[0].name}${c.detail[0].genres[1].name}')),
+                            Obx(() => Text('발매일 : ${c.detail[0].releaseDate}')),
+                            Obx(() => Text('평점 : ${c.detail[0].voteAverage}')),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: 20.0,
+                  ),
+                  child: Text(
+                    '개요',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                    margin: const EdgeInsets.only(
+                      left: 20.0,
                     ),
-                    Column(
-                      children: <Widget>[
-                        Obx(() => Text('${c.detail[0].title}')),
-                        Obx(() => Text('adult : ${c.detail[0].adult}')),
-                        Obx(() => Text(
-                            '${c.detail[0].genres[0].name}${c.detail[0].genres[1].name}')),
-                        Obx(() => Text('발매일 : ${c.detail[0].releaseDate}')),
-                        Obx(() => Text('평점 : ${c.detail[0].voteAverage}')),
-                      ],
-                    )
-                  ],
-                ),
+                    width: context.width - 30,
+                    child: Obx(() => Text('${c.detail[0].overview}'))),
                 SizedBox(
                   height: 30,
                 ),
-                Text('개요'),
-                SizedBox(
-                  height: 30,
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: 20.0,
+                  ),
+                  child: Text(
+                    '주요출연진',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Obx(() => Text('${c.detail[0].overview}')),
-                SizedBox(
-                  height: 30,
-                ),
-                Text('주요출연진'),
                 SizedBox(
                   height: 30,
                 ),
@@ -91,9 +121,12 @@ class Pagedetail extends StatelessWidget {
                     );
                   }),
                 ),
-                Text('리뷰'),
-                SizedBox(
-                  height: 16,
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    '리뷰',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Container(
                   width: 300,
@@ -135,7 +168,10 @@ class Review extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), //모서리를 둥글게
           border: Border.all(color: Colors.black12, width: 3)),
-      margin: const EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(
+        bottom: 20,
+        left: 20.0,
+      ),
       width: 300,
       height: 100,
       child: SingleChildScrollView(
